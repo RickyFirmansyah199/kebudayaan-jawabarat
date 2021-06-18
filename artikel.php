@@ -13,7 +13,6 @@ else{
 
 }
 
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,16 +20,19 @@ else{
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link rel="stylesheet" href="Table_Fixed_Header/vendor/bootstrap/css/bootstrap.css">
+    <title>Artikel</title>
 </head>
 <body>
-   
-    <img src="<?php echo$hasil ['foto'] ?>" alt="">
-    <p>
+   <br>
+<img src="<?php echo$hasil['foto']?>" class="img-fluid rounded mx-auto d-block" alt="Kebudayaan Jawa Barat" width="700" height="500" loading="lazy">
+<br>    
+<p>
         <?php echo$hasil['deskripsi']; ?>
     </p>
 
-    <form  action="tambahKomentar.php?id_artikel=<?php echo$_GET ['id_artikel'] ?>"method="POST" class="row g-3">
+    <!-- <form  action="tambahKomentar.php?id_artikel=<?php echo$_GET ['id_artikel'] ?>"method="POST" class="row g-3">
             <div class="col-md-6">
               <label for="inputNama" class="form-label">Nama</label>
               <input name="nama" type="text" class="form-control" id="inputNama">
@@ -57,6 +59,6 @@ else{
             <div class="col-12">
               <button name="kirim"type="submit" class="btn btn-primary">kirim</button>
             </div>
-          </form> 
+          </form>  -->
 </body>
 </html>

@@ -1,7 +1,7 @@
 <?php
   include'config.php';
-  $query="SELECT*FROM artikel";
-  $hasil=mysqli_query($conn,$query);
+  // $query="SELECT*FROM artikel";
+  // $hasil=mysqli_query($conn,$query);
 
   ?>
 <!DOCTYPE html>
@@ -11,6 +11,14 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="css/bootstrap.min.css">
+        <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.4.0/umd/popper.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"/>
+
+
         <script src="js/jquery-3.5.1.min.JS"></script>
         <link rel="stylesheet" href="style.css">
     </head>
@@ -27,7 +35,7 @@
                   <li class="nav-item ">
                     <a class="nav-link" href="index.php">Home <span class="sr-only"></span></a>
                   </li>
-                  <li class="nav-item">
+                  <!-- <li class="nav-item">
                     <a class="nav-link" href="Kategori/tarian.html">Seni tari</a>
                   </li>
                   <li class="nav-item">
@@ -38,7 +46,7 @@
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="Kategori/kesenian.html">Kesenian</a>
-                  </li>
+                  </li> -->
                   <li class="nav-item">
                     <a class="nav-link" href="about.html">About</a>
                   </li>
@@ -60,13 +68,13 @@
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                <img class="d-block w-100" src="Gambar/jaipong.jpeg" alt="First slide">
+                <img class="d-block w-100" src="Gambar/jaipong.jpeg" alt="First slide" width="600" height="600">
                 </div>
                 <div class="carousel-item">
-                <img class="d-block w-100" src="Gambar/rumah_adat.jpeg" alt="Second slide">
+                <img class="d-block w-100" src="Gambar/rumah_adat.jpeg" alt="Second slide" width="600" height="600">
                 </div>
                 <div class="carousel-item">
-                <img class="d-block w-100" src="Gambar/wayang.jpeg" alt="Third slide">
+                <img class="d-block w-100" src="Gambar/wayang.jpeg" alt="Third slide" width="600" height="600">
                 </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -83,35 +91,51 @@
         <section id="content">
             <div class="container-fluid p-0">
                 <center><h1>ARTIKEL</h1></center><BR></BR>
-              <div class="row no-gutters">
-                <?php
-                  if(mysqli_num_rows($hasil)==0){
-                    echo"kosong";
-                    
-                  }
-                  else{
 
-                  while($data=mysqli_fetch_assoc($hasil)){
-                   
-                 
-                ?>
+                <div class="btn-group me-2">
+                        <form class="d-flex" method="post" enctype="multipart/form-data">
+                            <input class="form-control me-2 border" type="text" name="keyword" placeholder="Cari Artikel" aria-label="Search" required>
+                            <button class="btn btn-outline-secondary" name="cari" type="submit">Cari</button>
+                        </form>
+                    </div>
+                    <div class="btn-group me-2">
+                
+    <button type="button" onclick= "refresh()" class="btn btn-sm btn-outline-secondary">
+      Segarkan Data
+    </button>
+                    </div>
+    <script>function refresh(){location.href = "index.php";} </script>
+    </div><br><br>
+              <div class="row no-gutters">
+
+                <?php
+    include("config.php");
+    $no = 1;
+    if(isset($_POST["cari"])){
+        $search = mysqli_real_escape_string($conn,$_POST['keyword']);
+        $query = mysqli_query($conn, "SELECT * FROM artikel WHERE judul LIKE '%$search%' ORDER BY judul ASC");
+    } else {
+        $query = mysqli_query($conn, "SELECT * FROM artikel ORDER BY judul ASC");
+    }
+    while ($data = mysqli_fetch_assoc($query)) {
+    ?>
                 <div class="col-md-4">
-                  <a href="artikel.php?id_artikel=<?php echo$data['id'] ?>"><img class="img-fluid" src="<?php echo$data['foto']  ?>" alt="" width="402" height="400"></a>
+                  <a href="artikel.php?id_artikel=<?php echo$data['id']?>" target="_blank"><img class="img-fluid" src="<?php echo$data['foto']  ?>" alt="" width="402" height="400"></a>
                   <center><h4><?php echo$data['judul']?></h4></center>
                   <br><br>
                 </div>
                 <?php
                  }
-                }
                 ?>
               
               </div> 
             </div>
           </section>
 
-     
+     <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
           <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
           <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
     </body>
 </html>
